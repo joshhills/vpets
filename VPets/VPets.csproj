@@ -16,6 +16,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.InMemory" Version="3.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="7.0.0" />
     <PackageReference Include="AutoMapper" Version="9.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Services\" />
@@ -28,6 +29,8 @@
     <Folder Include="Domain\Models\" />
     <Folder Include="Domain\Repositories\" />
     <Folder Include="Domain\Services\" />
+    <Folder Include="Domain\Models\Pets\" />
+    <Folder Include="Domain\Models\Metrics\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="WeatherForecast.cs" />

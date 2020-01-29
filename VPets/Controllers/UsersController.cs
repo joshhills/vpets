@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using VPets.Models;
 using VPets.Resources;
@@ -11,7 +8,7 @@ using VPets.Services;
 
 namespace VPets.Controllers
 {
-    [Route("/api/v1/users")]
+    [Route("/api/v1/[controller]")]
     [Produces("application/json")]
     [ApiController]
     public class UsersController : ControllerBase

@@ -3,6 +3,10 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPets", "VPets\VPets.csproj", "{D47FE343-7DC7-4C60-803B-B283B841458A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPetsIntegrationTests", "VPetsIntegrationTest\VPetsIntegrationTests.csproj", "{370D70B7-EA00-40F0-8677-84E36F13732C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VPetsUnitTests", "VPetsUnitTests\VPetsUnitTests.csproj", "{A6511F91-FB33-45E5-B3AC-0BEDEC1CEED4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +17,13 @@ Global
 		{D47FE343-7DC7-4C60-803B-B283B841458A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D47FE343-7DC7-4C60-803B-B283B841458A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D47FE343-7DC7-4C60-803B-B283B841458A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{370D70B7-EA00-40F0-8677-84E36F13732C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{370D70B7-EA00-40F0-8677-84E36F13732C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{370D70B7-EA00-40F0-8677-84E36F13732C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{370D70B7-EA00-40F0-8677-84E36F13732C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6511F91-FB33-45E5-B3AC-0BEDEC1CEED4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6511F91-FB33-45E5-B3AC-0BEDEC1CEED4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6511F91-FB33-45E5-B3AC-0BEDEC1CEED4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6511F91-FB33-45E5-B3AC-0BEDEC1CEED4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
