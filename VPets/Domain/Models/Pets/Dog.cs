@@ -11,7 +11,7 @@ namespace VPets.Domain.Models.Pets
             PetType.DOG,
             new Dictionary<MetricType, Metric>() {
                 { MetricType.HUNGER, new HungerMetric(0.04F) },
-                { MetricType.HAPPINESS, new HappinessMetric(0.75F) }
+                { MetricType.HAPPINESS, new HappinessMetric(0.075F) }
             }
         )
         { }

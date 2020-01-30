@@ -35,6 +35,11 @@ namespace VPets.Persistence.Repositories
             return await context.Pets.Include(p => p.User).OrderBy(p => p.Id).ToListAsync();
         }
 
+        public async Task<IEnumerable<Pet>> ListAsyncForUser(int userId)
+        {
+            return await context.Pets.Where(p => p.UserId == userId).OrderBy(p => p.Id).ToListAsync();
+        }
+
         public void Put(Pet pet)
         {
             context.Pets.Update(pet);

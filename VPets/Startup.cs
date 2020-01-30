@@ -31,13 +31,14 @@ namespace VPets
                 options.UseInMemoryDatabase("vpets-in-memory");
             });
 
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IPetRepository, PetRepository>();
-            services.AddScoped<IPetService, PetService>();
-            services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>()
+                .AddScoped<IUserService, UserService>()
+                .AddScoped<IPetRepository, PetRepository>()
+                .AddScoped<IPetService, PetService>()
+                .AddScoped<IUnitOfWork, UnitOfWork>()
+                .AddAutoMapper(typeof(Startup));
 
-            services.AddAutoMapper(typeof(Startup));
+            services.AddHostedService<PetMetricStateService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -48,11 +49,7 @@ namespace VPets
                 app.UseDeveloperExceptionPage();
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

@@ -11,6 +11,8 @@ namespace VPets.Domain.Repositories
 
         Task<IEnumerable<Pet>> ListAsync();
 
+        Task<IEnumerable<Pet>> ListAsyncForUser(int userId);
+
         Task CreateAsync(Pet pet);
 
         void Delete(Pet pet);

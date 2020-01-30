@@ -97,5 +97,24 @@ namespace VPets.Services
                 return null;
             }
         }
+
+        public async Task DegradeMetrics()
+        {
+            var pets = await ListAsync();
+
+            foreach (var pet in pets)
+            {
+                foreach (var metric in pet.Metrics)
+                {
+                    metric.Value.Degrade();
+                }
+                petRepository.Put(pet);
+            }
+        }
+
+        public async Task<IEnumerable<Pet>> ListAsyncForUser(int userId)
+        {
+            return await petRepository.ListAsyncForUser(userId);
+        }
     }
 }

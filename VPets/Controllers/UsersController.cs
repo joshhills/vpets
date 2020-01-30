@@ -2,6 +2,8 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using VPets.Domain.Models;
+using VPets.Domain.Services;
 using VPets.Models;
 using VPets.Resources;
 using VPets.Services;
@@ -14,11 +16,13 @@ namespace VPets.Controllers
     public class UsersController : ControllerBase
     {
         private readonly IUserService userService;
+        private readonly IPetService petService;
         private readonly IMapper mapper;
 
-        public UsersController(IUserService userService, IMapper mapper)
+        public UsersController(IUserService userService, IPetService petService, IMapper mapper)
         {
             this.userService = userService;
+            this.petService = petService;
             this.mapper = mapper;
         }
 
@@ -44,6 +48,22 @@ namespace VPets.Controllers
             var resource = mapper.Map<User, UserResource>(user);
 
             return Ok(resource);
+        }
+
+        [HttpGet("{id}/pets")]
+        public async Task<IActionResult> GetPetsAsync(int id)
+        {
+            var user = await userService.GetAsync(id);
+
+            if (user == null)
+            {
+                return NotFound();
+            }
+
+            var pets = await petService.ListAsyncForUser(id);
+            var resources = mapper.Map<IEnumerable<Pet>, IEnumerable<UserPetResource>>(pets);
+
+            return Ok(resources);
         }
 
         [HttpPost]

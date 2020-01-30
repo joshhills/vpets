@@ -12,10 +12,14 @@ namespace VPets.Domain.Services
 
         Task<IEnumerable<Pet>> ListAsync();
 
+        Task<IEnumerable<Pet>> ListAsyncForUser(int userId);
+
         Task<Pet> CreateAsync(Pet pet);
 
         Task<Pet> DeleteAsync(int id);
 
         Task<Pet> InteractAsync(int id, MetricType onMetric);
+
+        Task DegradeMetrics();
     }
 }
