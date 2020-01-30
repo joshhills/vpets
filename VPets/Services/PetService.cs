@@ -11,17 +11,35 @@ namespace VPets.Services
     public class PetService : IPetService
     {
         private readonly IPetRepository petRepository;
+        private readonly IUserRepository userRepository;
         private readonly IUnitOfWork unitOfWork;
 
-        public PetService(IPetRepository petRepository, IUnitOfWork unitOfWork)
+        public PetService(IPetRepository petRepository, IUserRepository userRepository, IUnitOfWork unitOfWork)
         {
             this.petRepository = petRepository;
+            this.userRepository = userRepository;
             this.unitOfWork = unitOfWork;
         }
 
-        public Task<Pet> CreateAsync(Pet pet)
+        public async Task<Pet> CreateAsync(Pet pet)
         {
-            throw new NotImplementedException();
+            try
+            {
+                var existingUser = await userRepository.GetAsync(pet.UserId);
+                if (existingUser == null)
+                {
+                    return null;
+                }
+
+                await petRepository.CreateAsync(pet);
+                await unitOfWork.CompleteAsync();
+
+                return pet;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
         }
 
         public async Task<Pet> GetAsync(int id)
@@ -32,6 +50,52 @@ namespace VPets.Services
         public async Task<IEnumerable<Pet>> ListAsync()
         {
             return await petRepository.ListAsync();
+        }
+
+        public async Task<Pet> DeleteAsync(int id)
+        {
+            var existingPet = await petRepository.GetAsync(id);
+
+            if (existingPet == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                petRepository.Delete(existingPet);
+                await unitOfWork.CompleteAsync();
+
+                return existingPet;
+            }
+            catch (Exception)
+            {
+                return null;
+            }
+        }
+
+        public async Task<Pet> InteractAsync(int id, Metric.MetricType onMetric)
+        {
+            var existingPet = await petRepository.GetAsync(id);
+
+            if (existingPet == null)
+            {
+                return null;
+            }
+
+            try
+            {
+                existingPet.Metrics.TryGetValue(onMetric, out Metric metric);
+                metric.Improve();
+
+                petRepository.Put(existingPet);
+                await unitOfWork.CompleteAsync();
+
+                return existingPet;
+            } catch (Exception)
+            {
+                return null;
+            }
         }
     }
 }

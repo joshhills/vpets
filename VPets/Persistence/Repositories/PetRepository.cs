@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using VPets.Domain.Models;
@@ -19,6 +20,11 @@ namespace VPets.Persistence.Repositories
             await context.Pets.AddAsync(pet);
         }
 
+        public void Delete(Pet pet)
+        {
+            context.Pets.Remove(pet);
+        }
+
         public async Task<Pet> GetAsync(int id)
         {
             return await context.Pets.Include(p => p.User).FirstOrDefaultAsync(p => p.Id == id);
@@ -26,7 +32,12 @@ namespace VPets.Persistence.Repositories
 
         public async Task<IEnumerable<Pet>> ListAsync()
         {
-            return await context.Pets.Include(p => p.User).ToListAsync();
+            return await context.Pets.Include(p => p.User).OrderBy(p => p.Id).ToListAsync();
+        }
+
+        public void Put(Pet pet)
+        {
+            context.Pets.Update(pet);
         }
     }
 }

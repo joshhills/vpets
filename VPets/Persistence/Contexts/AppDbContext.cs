@@ -14,6 +14,8 @@ namespace VPets.Persistence.Contexts
 {
     public class AppDbContext : DbContext
     {
+        private const string DATE_CREATED_PROPERTY_NAME = "DateCreated";
+
         public DbSet<User> Users { get; set; }
         public DbSet<Pet> Pets { get; set; }
 
@@ -35,10 +37,6 @@ namespace VPets.Persistence.Contexts
             builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(32);
             builder.Entity<User>().HasMany(u => u.Pets).WithOne(p => p.User).HasForeignKey(p => p.UserId);
 
-            var dummyUser = new User { Id = 1, Name = "Josh", DateCreated = DateTime.Now };
-
-            builder.Entity<User>().HasData(dummyUser);
-
             builder.Entity<Pet>().ToTable("Pets");
             builder.Entity<Pet>().HasKey(p => p.Id);
             builder.Entity<Pet>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
@@ -52,25 +50,23 @@ namespace VPets.Persistence.Contexts
             );
             builder.Entity<Pet>().Property(p => p.Type).IsRequired();
 
-            var dummyPet = new Cat
-            {
-                Id = 1,
-                DateCreated = DateTime.Now,
-                UserId = dummyUser.Id,
-                Type = PetType.CAT,
-                Name = "Pearl"
-            };
+            Seed(builder);
+        }
 
-            builder.Entity<Cat>().HasData(dummyPet);
+        private void Seed(ModelBuilder builder)
+        {
+            var dummyUser = new User { Id = 1, Name = "Josh", DateCreated = DateTime.Now };
+
+            builder.Entity<User>().HasData(dummyUser);
         }
 
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             DateTime saveTime = DateTime.UtcNow;
-            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == (EntityState) EntityState.Added))
+            foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
             {
-                if (entry.Property("DateCreated").CurrentValue == null)
-                    entry.Property("DateCreated").CurrentValue = saveTime;
+                if (entry.Property(DATE_CREATED_PROPERTY_NAME).CurrentValue == null)
+                    entry.Property(DATE_CREATED_PROPERTY_NAME).CurrentValue = saveTime;
             }
             return await base.SaveChangesAsync();
         }

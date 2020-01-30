@@ -33,11 +33,11 @@ namespace VPets.Domain.Models
             HAPPINESS = 2
         }
 
-        protected virtual void Degrade()
+        public virtual Metric Degrade()
         {
             DateTime now = DateTime.Now;
 
-            float elapsed = now.Millisecond - DateUpdated.Millisecond / 1000;
+            float elapsed = (float) (now - DateUpdated).TotalSeconds;
 
             float deltaValue = elapsed * DeltaPerSecond;
 
@@ -52,6 +52,16 @@ namespace VPets.Domain.Models
             }
 
             DateUpdated = now;
+
+            return this;
+        }
+
+        public virtual Metric Improve()
+        {
+            Value = Ascending ? Min : Max;
+            DateUpdated = DateTime.Now;
+
+            return this;
         }
     }
 }

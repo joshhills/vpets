@@ -12,5 +12,9 @@ namespace VPets.Domain.Repositories
         Task<IEnumerable<Pet>> ListAsync();
 
         Task CreateAsync(Pet pet);
+
+        void Delete(Pet pet);
+
+        void Put(Pet pet);
     }
 }

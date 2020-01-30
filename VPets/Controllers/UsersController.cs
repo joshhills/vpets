@@ -8,7 +8,7 @@ using VPets.Services;
 
 namespace VPets.Controllers
 {
-    [Route("/api/v1/[controller]")]
+    [Route("/api/v1/users")]
     [Produces("application/json")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -47,9 +47,9 @@ namespace VPets.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] CreateUserResource userResource)
+        public async Task<IActionResult> PostAsync([FromBody] CreateUserResource createUserResource)
         {
-            var user = mapper.Map<CreateUserResource, User>(userResource);
+            var user = mapper.Map<CreateUserResource, User>(createUserResource);
 
             var result = await userService.CreateAsync(user);
 
@@ -60,7 +60,7 @@ namespace VPets.Controllers
 
             var resource = mapper.Map<User, UserResource>(user);
 
-            return Ok(resource);
+            return Created($"/api/v1/users/{resource.Id}", resource);
         }
 
         [HttpDelete("{id}")]
