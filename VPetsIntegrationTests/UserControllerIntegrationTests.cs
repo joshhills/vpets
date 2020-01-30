@@ -1,10 +1,9 @@
-﻿using System;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Threading.Tasks;
 using VPets;
 using Xunit;
 
-namespace VPetsIntegrationTest
+namespace VPetsIntegrationTests
 {
     public class UserControllerIntegrationTests : IClassFixture<CustomWebApplicationFactory<Startup>>
     {

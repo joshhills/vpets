@@ -25,6 +25,7 @@ namespace VPetsUnitTests
 
             // Seed data
             dbContext.Add(new User { Id = 1, Name = "Josh" });
+            dbContext.SaveChangesAsync().Wait();
         }
 
         [Fact]

@@ -1,3 +1,4 @@
+using System;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -22,10 +23,13 @@ namespace VPets
 
         public static IHostBuilder CreateHostBuilder(string[] args)
         {
+            var port = Environment.GetEnvironmentVariable("PORT");
+
             return Host.CreateDefaultBuilder(args)
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
+                    webBuilder.UseUrls($"http://*{port}");
                 });
         }
     }

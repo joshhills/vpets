@@ -7,7 +7,7 @@ using Microsoft.Extensions.Logging;
 using VPets;
 using VPets.Persistence.Contexts;
 
-namespace VPetsIntegrationTest
+namespace VPetsIntegrationTests
 {
     public class CustomWebApplicationFactory<TStartup> : WebApplicationFactory<Startup>
     {

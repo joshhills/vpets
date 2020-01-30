@@ -1,8 +1,0 @@
-version: '3.4'
-
-services:
-  vpets:
-    image: ${DOCKER_REGISTRY-}vpets
-    build:
-      context: .
-      dockerfile: VPets/Dockerfile
