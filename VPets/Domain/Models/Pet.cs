@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using VPets.Models;
 using static VPets.Domain.Models.Metric;
 
@@ -23,7 +24,10 @@ namespace VPets.Domain.Models
 
     public enum PetType
     {
-        CAT,
-        DOG
+        [Description("Cat")]
+        CAT = 1,
+
+        [Description("Dog")]
+        DOG = 2
     }
 }

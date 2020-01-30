@@ -49,14 +49,14 @@ namespace VPets.Persistence.Contexts
                 v => v == null
                     ? new Dictionary<MetricType, Metric>()
                     : JsonConvert.DeserializeObject<Dictionary<MetricType, Metric>>(v)
-                    );
+            );
             builder.Entity<Pet>().Property(p => p.Type).IsRequired();
 
             var dummyPet = new Cat
             {
                 Id = 1,
                 DateCreated = DateTime.Now,
-                UserId = 1,
+                UserId = dummyUser.Id,
                 Type = PetType.CAT,
                 Name = "Pearl"
             };

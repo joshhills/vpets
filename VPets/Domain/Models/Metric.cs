@@ -1,4 +1,6 @@
 ﻿using System;
+using System.ComponentModel;
+
 namespace VPets.Domain.Models
 {
     public abstract class Metric
@@ -24,8 +26,11 @@ namespace VPets.Domain.Models
 
         public enum MetricType
         {
-            HUNGER,
-            HAPPINESS
+            [Description("hunger")]
+            HUNGER = 1,
+
+            [Description("happiness")]
+            HAPPINESS = 2
         }
 
         protected virtual void Degrade()

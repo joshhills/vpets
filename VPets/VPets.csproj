@@ -31,6 +31,7 @@
     <Folder Include="Domain\Services\" />
     <Folder Include="Domain\Models\Pets\" />
     <Folder Include="Domain\Models\Metrics\" />
+    <Folder Include="Extensions\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Remove="WeatherForecast.cs" />

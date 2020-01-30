@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using VPets.Domain.Models;
 using VPets.Domain.Services;
-using VPets.Services;
+using VPets.Resources;
 
 namespace VPets.Controllers
 {
     [Route("/api/v1/[controller]")]
     [Produces("application/json")]
     [ApiController]
-    public class PetsController
+    public class PetsController : ControllerBase
     {
         private readonly IPetService petService;
         private readonly IMapper mapper;
@@ -24,9 +23,28 @@ namespace VPets.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<Pet>> GetAsync()
+        public async Task<IEnumerable<PetResource>> GetAsync()
         {
-            return await petService.ListAsync();
+            var pets = await petService.ListAsync();
+
+            var resources = mapper.Map<IEnumerable<Pet>, IEnumerable<PetResource>>(pets);
+
+            return resources;
+        }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetAsync(int id)
+        {
+            var pet = await petService.GetAsync(id);
+
+            if (pet == null)
+            {
+                return NotFound();
+            }
+
+            var resource = mapper.Map<Pet, PetResource>(pet);
+
+            return Ok(resource);
         }
     }
 }

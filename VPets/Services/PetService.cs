@@ -24,6 +24,11 @@ namespace VPets.Services
             throw new NotImplementedException();
         }
 
+        public async Task<Pet> GetAsync(int id)
+        {
+            return await petRepository.GetAsync(id);
+        }
+
         public async Task<IEnumerable<Pet>> ListAsync()
         {
             return await petRepository.ListAsync();

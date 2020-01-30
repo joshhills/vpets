@@ -23,9 +23,12 @@ namespace VPets.Controllers
         }
 
         [HttpGet]
-        public async Task<IEnumerable<User>> GetAsync()
+        public async Task<IEnumerable<UserResource>> GetAsync()
         {
-            return await userService.ListAsync();
+            var users = await userService.ListAsync();
+            var resources = mapper.Map<IEnumerable<User>, IEnumerable<UserResource>>(users);
+
+            return resources;
         }
 
         [HttpGet("{id}")]
@@ -38,13 +41,15 @@ namespace VPets.Controllers
                 return NotFound();
             }
 
-            return Ok(user);
+            var resource = mapper.Map<User, UserResource>(user);
+
+            return Ok(resource);
         }
 
         [HttpPost]
-        public async Task<IActionResult> PostAsync([FromBody] UserResource userResource)
+        public async Task<IActionResult> PostAsync([FromBody] CreateUserResource userResource)
         {
-            var user = mapper.Map<UserResource, User>(userResource);
+            var user = mapper.Map<CreateUserResource, User>(userResource);
 
             var result = await userService.CreateAsync(user);
 
@@ -53,7 +58,9 @@ namespace VPets.Controllers
                 return BadRequest();
             }
 
-            return Ok(user);
+            var resource = mapper.Map<User, UserResource>(user);
+
+            return Ok(resource);
         }
 
         [HttpDelete("{id}")]
@@ -66,7 +73,9 @@ namespace VPets.Controllers
                 return BadRequest();
             }
 
-            return Ok(user);
+            var resource = mapper.Map<User, UserResource>(user);
+
+            return Ok(resource);
         }
     }
 }

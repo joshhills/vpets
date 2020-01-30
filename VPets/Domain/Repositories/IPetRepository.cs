@@ -7,6 +7,8 @@ namespace VPets.Domain.Repositories
 {
     public interface IPetRepository
     {
+        Task<Pet> GetAsync(int id);
+
         Task<IEnumerable<Pet>> ListAsync();
 
         Task CreateAsync(Pet pet);
