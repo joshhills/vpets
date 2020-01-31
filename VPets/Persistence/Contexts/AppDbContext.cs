@@ -32,9 +32,6 @@ namespace VPets.Persistence.Contexts
         {
             base.OnModelCreating(builder);
 
-            builder.Entity<Cat>().HasBaseType<Pet>();
-            builder.Entity<Dog>().HasBaseType<Pet>();
-
             builder.Entity<User>().ToTable("Users");
             builder.Entity<User>().HasKey(u => u.Id);
             builder.Entity<User>().Property(u => u.Id).IsRequired().ValueGeneratedOnAdd();
@@ -42,18 +39,22 @@ namespace VPets.Persistence.Contexts
             builder.Entity<User>().Property(u => u.Name).IsRequired().HasMaxLength(32);
             builder.Entity<User>().HasMany(u => u.Pets).WithOne(p => p.User).HasForeignKey(p => p.UserId);
 
+            builder.Entity<Cat>().HasBaseType<Pet>();
+            builder.Entity<Dog>().HasBaseType<Pet>();
+
             builder.Entity<Pet>().ToTable("Pets");
             builder.Entity<Pet>().HasKey(p => p.Id);
             builder.Entity<Pet>().Property(p => p.Id).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Pet>().Property(p => p.DateCreated).IsRequired().ValueGeneratedOnAdd();
             builder.Entity<Pet>().Property(p => p.Name).IsRequired().HasMaxLength(32);
+            builder.Entity<Pet>().Property(p => p.Type).IsRequired();
+            // Serialise Metrics i.e. game-data as string in column - temporary solution!
+            // Would probably use a separate table or NoSQL
             builder.Entity<Pet>().Property(p => p.Metrics).IsRequired().HasConversion(
                 v => JsonConvert.SerializeObject(v),
                 v => v == null
                     ? new Dictionary<MetricType, Metric>()
-                    : JsonConvert.DeserializeObject<Dictionary<MetricType, Metric>>(v)
-            );
-            builder.Entity<Pet>().Property(p => p.Type).IsRequired();
+                    : JsonConvert.DeserializeObject<Dictionary<MetricType, Metric>>(v));
 
             Seed(builder);
         }
@@ -74,11 +75,13 @@ namespace VPets.Persistence.Contexts
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             DateTime saveTime = DateTime.UtcNow;
+
             foreach (var entry in ChangeTracker.Entries().Where(e => e.State == EntityState.Added))
             {
                 if (entry.Property(DATE_CREATED_PROPERTY_NAME).CurrentValue == null)
                     entry.Property(DATE_CREATED_PROPERTY_NAME).CurrentValue = saveTime;
             }
+
             return await base.SaveChangesAsync();
         }
     }
