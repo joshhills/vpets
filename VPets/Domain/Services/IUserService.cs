@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using VPets.Models;
+using VPets.Domain.Models;
 
 namespace VPets.Services
 {

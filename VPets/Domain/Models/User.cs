@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using VPets.Domain.Models;
+﻿using System.Collections.Generic;
 
-namespace VPets.Models
+namespace VPets.Domain.Models
 {
     public class User : Entity
     {

@@ -3,7 +3,6 @@ using System.Threading;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using VPets.Domain.Repositories;
 using VPets.Domain.Services;
 
 namespace VPets.Services

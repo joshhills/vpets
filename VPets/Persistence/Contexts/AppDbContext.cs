@@ -7,7 +7,6 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using VPets.Domain.Models;
 using VPets.Domain.Models.Pets;
-using VPets.Models;
 using static VPets.Domain.Models.Metric;
 
 namespace VPets.Persistence.Contexts

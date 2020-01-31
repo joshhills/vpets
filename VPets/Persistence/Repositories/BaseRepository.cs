@@ -1,5 +1,4 @@
-﻿using System;
-using VPets.Persistence.Contexts;
+﻿using VPets.Persistence.Contexts;
 
 namespace VPets.Persistence.Repositories
 {

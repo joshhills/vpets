@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
@@ -77,7 +76,7 @@ namespace VPets.Controllers
                 return BadRequest();
             }
 
-            var resource = mapper.Map<Pet, CreatedPetResource>(pet);
+            var resource = mapper.Map<Pet, PetResource>(pet);
 
             return Created($"/api/v1/pets/{resource.Id}", resource);
         }

@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.ComponentModel;
-using VPets.Models;
 using static VPets.Domain.Models.Metric;
 
 namespace VPets.Domain.Models

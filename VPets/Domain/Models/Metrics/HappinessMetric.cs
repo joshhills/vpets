@@ -1,5 +1,4 @@
-﻿using System;
-namespace VPets.Domain.Models.Metrics
+﻿namespace VPets.Domain.Models.Metrics
 {
     public class HappinessMetric : Metric
     {

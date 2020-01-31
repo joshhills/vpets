@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using VPets.Domain.Models.Metrics;
 using static VPets.Domain.Models.Metric;
 

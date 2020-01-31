@@ -1,5 +1,6 @@
 ﻿using System;
-namespace VPets.Models
+
+namespace VPets.Domain.Models
 {
     public class Entity
     {
