@@ -107,7 +107,7 @@ namespace VPets.Services
         {
             var pets = await ListAsync();
 
-            // Not very efficient...
+            // May not scale well.
             foreach (var pet in pets)
             {
                 foreach (var metric in pet.Metrics)

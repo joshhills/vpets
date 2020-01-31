@@ -1,5 +1,6 @@
 ﻿using System;
 using Microsoft.EntityFrameworkCore;
+using VPets.Domain.Models;
 using VPets.Persistence.Contexts;
 
 namespace VPetsUnitTests.Mocks

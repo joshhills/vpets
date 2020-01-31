@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace VPets.Domain.Models
 {
@@ -16,5 +17,10 @@ namespace VPets.Domain.Models
         /// Pets the user owns - required by EFC.
         /// </summary>
         public IList<Pet> Pets { get; set; } = new List<Pet>();
+
+        public void ToList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }
