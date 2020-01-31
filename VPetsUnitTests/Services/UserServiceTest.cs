@@ -1,5 +1,5 @@
 using System;
-using VPets.Models;
+using VPets.Domain.Models;
 using VPets.Persistence.Repositories;
 using VPets.Services;
 using VPetsUnitTests.Mocks;

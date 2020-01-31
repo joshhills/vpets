@@ -116,7 +116,7 @@ namespace VPets.Controllers
                 return BadRequest();
             }
 
-            var resource = mapper.Map<Pet, PetResource>(pet);
+            var resource = mapper.Map<Pet, CreatedPetResource>(pet);
 
             return Created($"/api/v1/pets/{resource.Id}", resource);
         }

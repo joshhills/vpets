@@ -4,12 +4,12 @@ using System.ComponentModel.DataAnnotations;
 namespace VPets.Resources
 {
     /// <summary>
-    /// Display a Pet to the client.
+    /// Display a Pet that has just been created to the client.
     /// </summary>
     /// <remarks>
     /// The User has been omitted as it is irrelevant to the client.
     /// </remarks>
-    public class PetResource
+    public class CreatedPetResource
     {
         /// <summary>
         /// Unique Id as auto-incrementing integer.

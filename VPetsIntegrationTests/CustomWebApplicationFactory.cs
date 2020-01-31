@@ -5,6 +5,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using VPets;
+using VPets.Domain.Models;
+using VPets.Domain.Models.Pets;
 using VPets.Persistence.Contexts;
 
 namespace VPetsIntegrationTests
@@ -44,7 +46,7 @@ namespace VPetsIntegrationTests
                 try
                 {
                     // Seed the database with some specific test data.
-                    //SeedData.PopulateTestData(appDb);
+                    Seed(appDb);
                 }
                 catch (Exception ex)
                 {
@@ -52,6 +54,15 @@ namespace VPetsIntegrationTests
                                         "database with test messages. Error: {ex.Message}");
                 }
             });
+        }
+
+        private void Seed(AppDbContext appDb)
+        {
+            appDb.Add(new User { Id = 2, Name = "Daniel" });
+            appDb.Add(new Cat { Id = 1, UserId = 1, Name = "Meowser" });
+            appDb.Add(new Dog { Id = 2, UserId = 1, Name = "Woofus" });
+
+            appDb.SaveChangesAsync().Wait();
         }
     }
 }
