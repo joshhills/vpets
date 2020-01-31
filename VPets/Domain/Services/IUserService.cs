@@ -4,6 +4,9 @@ using VPets.Domain.Models;
 
 namespace VPets.Services
 {
+    /// <summary>
+    /// CRUD operations on Users.
+    /// </summary>
     public interface IUserService
     {
         Task<User> GetAsync(int id);

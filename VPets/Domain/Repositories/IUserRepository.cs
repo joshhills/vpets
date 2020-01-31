@@ -4,6 +4,9 @@ using VPets.Domain.Models;
 
 namespace VPets.Persistence.Repositories
 {
+    /// <summary>
+    /// CRUD operations for Users.
+    /// </summary>
     public interface IUserRepository
     {
         Task<IEnumerable<User>> ListAsync();

@@ -6,6 +6,9 @@ using VPets.Persistence.Contexts;
 
 namespace VPets.Persistence.Repositories
 {
+    /// <summary>
+    /// I/O on the databsae context for User table.
+    /// </summary>
     public class UserRepository : BaseRepository, IUserRepository
     {
         public UserRepository(AppDbContext context) : base(context)

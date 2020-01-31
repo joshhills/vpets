@@ -25,6 +25,7 @@ namespace VPets.Services
         {
             try
             {
+                // Ensure Pet exists to be linked with...
                 var existingUser = await userRepository.GetAsync(pet.UserId);
                 if (existingUser == null)
                 {
@@ -38,6 +39,7 @@ namespace VPets.Services
             }
             catch (Exception)
             {
+                // TODO: Better error handling!
                 return null;
             }
         }
@@ -54,6 +56,7 @@ namespace VPets.Services
 
         public async Task<Pet> DeleteAsync(int id)
         {
+            // Find the Pet to delete...
             var existingPet = await petRepository.GetAsync(id);
 
             if (existingPet == null)
@@ -70,6 +73,7 @@ namespace VPets.Services
             }
             catch (Exception)
             {
+                // TODO: Better error handling!
                 return null;
             }
         }
@@ -94,6 +98,7 @@ namespace VPets.Services
                 return existingPet;
             } catch (Exception)
             {
+                // TODO: Better error handling!
                 return null;
             }
         }
@@ -102,6 +107,7 @@ namespace VPets.Services
         {
             var pets = await ListAsync();
 
+            // Not very efficient...
             foreach (var pet in pets)
             {
                 foreach (var metric in pet.Metrics)

@@ -27,12 +27,14 @@ namespace VPets.Services
                 return user;
             } catch (Exception)
             {
+                // TODO: Better error handling!
                 return null;
             }
         }
 
         public async Task<User> DeleteAsync(int id)
         {
+            // Find User to delete...
             var existingUser = await userRepository.GetAsync(id);
 
             if (existingUser == null)
@@ -48,6 +50,7 @@ namespace VPets.Services
                 return existingUser;
             } catch (Exception)
             {
+                // TODO: Better error handling!
                 return null;
             }
         }

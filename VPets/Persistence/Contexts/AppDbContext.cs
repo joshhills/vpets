@@ -11,16 +11,22 @@ using static VPets.Domain.Models.Metric;
 
 namespace VPets.Persistence.Contexts
 {
+    /// <summary>
+    /// Bootstrap ORM and seed data.
+    /// </summary>
     public class AppDbContext : DbContext
     {
+        /// <summary>
+        /// The column in the data store corresponding to the DateCreated
+        /// field on Entity.
+        /// </summary>
         private const string DATE_CREATED_PROPERTY_NAME = "DateCreated";
 
         public DbSet<User> Users { get; set; }
         public DbSet<Pet> Pets { get; set; }
 
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
-        {
-        }
+        { }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {
@@ -59,6 +65,12 @@ namespace VPets.Persistence.Contexts
             builder.Entity<User>().HasData(dummyUser);
         }
 
+        /// <summary>
+        /// Override to saving changes that establishes a DateCreated field on
+        /// entities.
+        /// </summary>
+        /// <param name="cancellationToken">Whether the operation should stop</param>
+        /// <returns>Response code</returns>
         public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default(CancellationToken))
         {
             DateTime saveTime = DateTime.UtcNow;

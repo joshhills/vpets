@@ -8,6 +8,9 @@ using VPets.Persistence.Contexts;
 
 namespace VPets.Persistence.Repositories
 {
+    /// <summary>
+    /// I/O on the databsae context for Pet table.
+    /// </summary>
     public class PetRepository : BaseRepository, IPetRepository
     {
         public PetRepository(AppDbContext context) : base(context)

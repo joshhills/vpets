@@ -4,6 +4,13 @@ using static VPets.Domain.Models.Metric;
 
 namespace VPets.Domain.Models.Pets
 {
+    /// <summary>
+    /// Cats become hungry faster than they become unhappy...
+    /// </summary>
+    /// <remarks>
+    /// Since this is a POCO it can be extended with extra metrics,
+    /// fields, methods etc.
+    /// </remarks>
     public class Cat : Pet
     {
         public Cat() : base(

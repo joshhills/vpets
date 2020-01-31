@@ -14,6 +14,7 @@ namespace VPets.Persistence.Repositories
 
         public async Task CompleteAsync()
         {
+            // Apply repository changes to data store.
             await context.SaveChangesAsync();
         }
     }

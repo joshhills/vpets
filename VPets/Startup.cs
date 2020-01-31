@@ -19,20 +19,21 @@ namespace VPets
 {
     public class Startup
     {
+        public IConfiguration Configuration { get; }
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
         }
 
-        public IConfiguration Configuration { get; }
-
-        // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllers().AddNewtonsoftJson();
 
+            // Configure documentation tools.
             services.AddSwaggerGen(c =>
             {
+                // General information.
                 c.SwaggerDoc("v1", new OpenApiInfo {
                     Title = "VPets",
                     Version = "v1",
@@ -51,10 +52,12 @@ namespace VPets
                 c.IncludeXmlComments(xmlPath);
             });
 
+            // Configure database.
             services.AddDbContext<AppDbContext>(options => {
                 options.UseInMemoryDatabase("vpets-in-memory");
             });
 
+            // Configure other service mappings for dependency-injection.
             services.AddScoped<IUserRepository, UserRepository>()
                 .AddScoped<IUserService, UserService>()
                 .AddScoped<IPetRepository, PetRepository>()
@@ -65,9 +68,14 @@ namespace VPets
             services.AddHostedService<PetMetricStateService>();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            // Configure HTTP middleware
+            if (env.IsDevelopment())
+            {
+                app.UseDeveloperExceptionPage();
+            }
+
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
@@ -75,11 +83,6 @@ namespace VPets
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "VPets V1");
                 c.RoutePrefix = string.Empty;
             });
-
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
 
             app.UseHttpsRedirection();
 

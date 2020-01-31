@@ -27,7 +27,7 @@ namespace VPets.Controllers
         }
 
         /// <summary>
-        /// Gets a list of all Users
+        /// Gets a list of all Users.
         /// </summary>
         /// <returns>A list of Users</returns>
         /// <response code="200">Returns a list of Users</response>
@@ -42,7 +42,7 @@ namespace VPets.Controllers
         }
 
         /// <summary>
-        /// Gets a specific User by Id
+        /// Gets a specific User by Id.
         /// </summary>
         /// <returns>A User if one exists</returns>
         /// <param name="id">The User's unique Id</param>
@@ -68,7 +68,7 @@ namespace VPets.Controllers
         }
 
         /// <summary>
-        /// Gets a list of all Pets related to a specific User
+        /// Gets a list of all Pets related to a specific User.
         /// </summary>
         /// <returns>A list of Pets belonging to the User if they exist</returns>
         /// <param name="id">The User's unique Id</param>
@@ -95,7 +95,7 @@ namespace VPets.Controllers
         }
 
         /// <summary>
-        /// Creates a User
+        /// Creates a User.
         /// </summary>
         /// <remarks>
         /// Sample request:
@@ -109,12 +109,10 @@ namespace VPets.Controllers
         /// <returns>A User if one was created</returns>
         /// <param name="createUserResource">User information</param>
         /// <response code="201">User created</response>
-        /// <response code="404">User not found</response>
         /// <response code="400">Bad request body</response>
         [HttpPost]
         [ProducesResponseType(typeof(UserResource), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<IActionResult> PostAsync([FromBody] CreateUserResource createUserResource)
         {
             var user = mapper.Map<CreateUserResource, User>(createUserResource);
@@ -132,7 +130,7 @@ namespace VPets.Controllers
         }
 
         /// <summary>
-        /// Deletes a specific User
+        /// Deletes a specific User.
         /// </summary>
         /// <param name="id">The User's unique Id</param>
         /// <response code="200">User deleted</response>
