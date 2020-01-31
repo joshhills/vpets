@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
+z`FROM mcr.microsoft.com/dotnet/core/aspnet:3.1-buster-slim AS base
 
 FROM mcr.microsoft.com/dotnet/core/sdk:3.1-buster AS build
 WORKDIR /src
@@ -8,6 +8,14 @@ COPY VPetsUnitTests/VPetsUnitTests.csproj VPetsUnitTests/
 COPY VPetsIntegrationTests/VPetsIntegrationTests.csproj VPetsIntegrationTests/
 RUN dotnet restore
 COPY . .
+
+FROM build as testing
+WORKDIR /src/VPets
+run dotnet build
+WORKDIR /src/VPetsUnitTests
+run dotnet build
+WORKDIR /src/VPetsIntegrationTests
+run dotnet build
 
 FROM build AS publish
 WORKDIR /src/VPets

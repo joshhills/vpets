@@ -173,5 +173,18 @@ namespace VPetsIntegrationTests
 
             Assert.True(getResponse.Metrics["hunger"] > postResponse.Metrics["hunger"]);
         }
+
+        [Fact]
+        public async Task CannotInteractPetWithBadMetricType()
+        {
+            // Arrange
+            var interactRequest = "/api/v1/pets/1/interact?onMetric=AAAH";
+
+            // Act
+            var httpPostResponse = await client.PostAsync(interactRequest, null);
+
+            // Assert
+            Assert.Equal(HttpStatusCode.BadRequest, httpPostResponse.StatusCode);
+        }
     }
 }
