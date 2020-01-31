@@ -15,7 +15,7 @@ namespace VPets.Extensions
         /// <typeparam name="TEnum">A generic enum type</typeparam>
         /// <param name="enum">An arbitrary enum value</param>
         /// <returns>A string describing the enum</returns>
-        public static string ToDesriptionString<TEnum>(this TEnum @enum)
+        public static string ToDescriptionString<TEnum>(this TEnum @enum)
         {
             FieldInfo info = @enum.GetType().GetField(@enum.ToString());
             var attributes = (DescriptionAttribute[])info.GetCustomAttributes(typeof(DescriptionAttribute), false);

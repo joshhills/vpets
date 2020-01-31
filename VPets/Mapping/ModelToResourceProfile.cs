@@ -21,13 +21,13 @@ namespace VPets.Mapping
             // Some duplicate code here could be refactored with a ResolutionContext
             CreateMap<Pet, PetResource>()
                 .ForMember(src => src.Type,
-                           opt => opt.MapFrom(src => src.Type.ToDesriptionString()))
+                           opt => opt.MapFrom(src => src.Type.ToDescriptionString()))
                 .ForMember(src => src.Metrics,
                            SimplifyMetrics<PetResource>());
 
             CreateMap<Pet, UserPetResource>()
                 .ForMember(src => src.Type,
-                           opt => opt.MapFrom(src => src.Type.ToDesriptionString()))
+                           opt => opt.MapFrom(src => src.Type.ToDescriptionString()))
                 .ForMember(src => src.Metrics,
                            SimplifyMetrics<UserPetResource>());
         }
@@ -43,7 +43,7 @@ namespace VPets.Mapping
         private static Action<IMemberConfigurationExpression<Pet, T, Dictionary<string, float>>> SimplifyMetrics<T>()
         {
             return opt => opt.MapFrom(src => src.Metrics.ToDictionary(
-                x => x.Key.ToDesriptionString(),
+                x => x.Key.ToDescriptionString(),
                 // Pre-compute the correct metric value at the time of invocation
                 // and round it to two decimal places for clarity.
                 x => Math.Round(x.Value.Degrade().Value, 2)));
