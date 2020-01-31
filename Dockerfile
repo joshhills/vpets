@@ -15,5 +15,5 @@ RUN dotnet publish -c Release -o /src/publish
 
 FROM base AS runtime
 WORKDIR /app
-COPY --from=publish /app/publish .
+COPY --from=publish /src/publish .
 CMD ASPNETCORE_URLS=http://*:$PORT dotnet VPets.dll

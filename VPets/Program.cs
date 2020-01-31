@@ -29,7 +29,6 @@ namespace VPets
                 .ConfigureWebHostDefaults(webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
-                    webBuilder.UseUrls($"http://*{port}");
                 });
         }
     }
