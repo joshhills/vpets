@@ -6,7 +6,6 @@ using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 using VPets;
-using VPets.Persistence.Repositories;
 using VPets.Resources;
 using Xunit;
 
@@ -20,8 +19,6 @@ namespace VPetsIntegrationTests
         {
             client = factory.CreateClient();
         }
-
-        public object AppDbContextMock { get; }
 
         [Fact]
         public async Task CanGetUsers()
@@ -56,11 +53,11 @@ namespace VPetsIntegrationTests
             // Assert content
             var jsonResponse = await httpResponse.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<UserResource>(jsonResponse);
-            Assert.True(response.Name.Equals("Josh"));
+            Assert.Equal("Josh", response.Name);
         }
 
         [Fact]
-        public async Task CanGetUsersPets()
+        public async Task CanGetPetsForUser()
         {
             // Arrange
             var request = "/api/v1/users/1/pets";
@@ -88,7 +85,7 @@ namespace VPetsIntegrationTests
 
             // Assert response
             var response = await httpResponse.Content.ReadAsStringAsync();
-            Assert.True(httpResponse.StatusCode == HttpStatusCode.NotFound);
+            Assert.Equal(HttpStatusCode.NotFound, httpResponse.StatusCode);
         }
 
         [Fact]
@@ -109,7 +106,7 @@ namespace VPetsIntegrationTests
                 new StringContent(JsonConvert.SerializeObject(request.Body), Encoding.Default, "application/json"));
 
             // Assert
-            Assert.True(httpResponse.StatusCode == HttpStatusCode.BadRequest);
+            Assert.Equal(HttpStatusCode.BadRequest, httpResponse.StatusCode);
         }
 
         [Fact]
@@ -130,7 +127,7 @@ namespace VPetsIntegrationTests
                 new StringContent(JsonConvert.SerializeObject(request.Body), Encoding.Default, "application/json"));
             var jsonResponse = await httpResponse.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<UserResource>(jsonResponse);
-            Assert.True(response.Name.Equals("Johnny"));
+            Assert.Equal("Johnny", response.Name);
         }
 
         [Fact]
@@ -161,7 +158,7 @@ namespace VPetsIntegrationTests
             httpResponse.EnsureSuccessStatusCode();
             var jsonResponse = await httpResponse.Content.ReadAsStringAsync();
             var response = JsonConvert.DeserializeObject<UserResource>(jsonResponse);
-            Assert.True(response.Name.Equals("Delete Me"));
+            Assert.Equal("Delete Me", response.Name);
         }
     }
 }

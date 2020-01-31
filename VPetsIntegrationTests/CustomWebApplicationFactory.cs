@@ -59,8 +59,8 @@ namespace VPetsIntegrationTests
         private void Seed(AppDbContext appDb)
         {
             appDb.Add(new User { Id = 2, Name = "Daniel" });
-            appDb.Add(new Cat { Id = 1, UserId = 1, Name = "Meowser" });
-            appDb.Add(new Dog { Id = 2, UserId = 1, Name = "Woofus" });
+            appDb.Add(new Cat { Id = 100, UserId = 1, Name = "Meowser" });
+            appDb.Add(new Dog { Id = 101, UserId = 1, Name = "Woofus" });
 
             appDb.SaveChangesAsync().Wait();
         }
