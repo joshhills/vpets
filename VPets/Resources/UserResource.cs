@@ -24,7 +24,7 @@ namespace VPets.Resources
         [Required]
         [MinLength(3)]
         [MaxLength(32)]
-        [RegularExpression("/^[a-z ,.'-]+$/i", ErrorMessage = "Must be simple characters and no extra spacing")]
+        [RegularExpression(@"^[a-zA-Z''-'\s]*$", ErrorMessage = "Must be simple characters and no extra spacing")]
         public string Name { get; set; }
     }
 }
