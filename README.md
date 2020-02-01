@@ -32,7 +32,7 @@ I expressed the pets as POCOs with abstract parent classes - as a result, types 
 
 #### Game Loop
 
-The core game loop is achieved by using *time deltas* to compute the "actual" values of metrics. A combination of a background service to mutate pet metrics on the server (while the user is "offline"), and volatile computation on GET requests ensures the user always receives accurate information about their pets, without putting too much load on the service or breaking HTTP method specifications such as idempotency. Pet metrics degrade linearly, and when interacted with are set to their "best" value. Most virtual pet games react will close their game loop with further distinctions between "ALIVE" and "DEAD" based on player actions - I have designed the system with this in mind.
+The core game loop is achieved by using *time deltas* to compute the "actual" values of metrics. A combination of a background service to mutate pet metrics on the server (while the user is "offline"), and volatile computation on GET requests ensures the user always receives accurate information about their pets, without putting too much load on the service or breaking HTTP method specifications such as idempotency. Pet metrics degrade linearly, and when interacted with are set to their "best" value. Most virtual pet games will close their game loop by killing the pet (or making it "run away" a la Nintendogs) based on player actions - I have designed the system with this in mind.
 
 #### Defensiveness
 
